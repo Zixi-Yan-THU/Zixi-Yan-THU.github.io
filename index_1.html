@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* ===== 全局设置 ===== */
+        html{scroll-behavior:smooth} /* 点击导航锚点时平滑滚动 */
+        body{
+            background:linear-gradient(180deg,#F7F4FC 0%,#E9E2F5 100%); /* 整页淡紫渐变背景 */
+            font-family:"Segoe UI","Microsoft YaHei",Arial,sans-serif;
+            color:#333;
+            margin:0; /* 去掉默认外边距，让顶部横幅通栏铺满 */
+        }
+
+        /* ===== 顶部横幅（Hero）：个人信息区 ===== */
+        .hero{
+            background:linear-gradient(135deg,#5C2D91 0%,#8B5FBF 60%,#B08BD0 100%); /* 清华紫渐变 */
+            color:#fff;
+            text-align:center;
+            padding:56px 20px 40px;
+            border-radius:0 0 28px 28px; /* 底部圆角，更有设计感 */
+        }
+        .avatar{
+            width:110px;height:110px;
+            margin:0 auto 16px;
+            border-radius:50%;           /* 圆形头像占位 */
+            background:rgba(255,255,255,.18);
+            border:4px solid rgba(255,255,255,.7);
+            display:flex;align-items:center;justify-content:center;
+            font-size:40px;font-weight:bold;letter-spacing:2px;
+        }
+        .hero h1{margin:0 0 8px;font-size:34px;letter-spacing:1px}
+        .tagline{margin:0 0 24px;color:rgba(255,255,255,.85);font-size:16px}
+
+        /* 导航胶囊按钮 */
+        nav a{
+            display:inline-block;
+            margin:4px 6px;padding:7px 18px;
+            border:1px solid rgba(255,255,255,.6);
+            border-radius:999px;
+            color:#fff;text-decoration:none;font-size:14px;
+            transition:all .25s; /* 悬停时的平滑过渡 */
+        }
+        nav a:hover{background:#fff;color:#5C2D91} /* 悬停变白底紫字 */
+
+        /* ===== 主体内容区 ===== */
+        main{max-width:880px;margin:0 auto;padding:8px 20px 40px}
+        section{margin-top:36px}
+
+        /* 板块标题：清华紫 + 加粗 + 浅紫标题块（沿用之前的规范） */
+        h2{
+            display:inline-block;
+            color:#5C2D91;            /* 清华紫（Tsinghua Purple） */
+            font-weight:bold;
+            background-color:#E3D8F2; /* 浅紫色标题块 */
+            border-left:6px solid #5C2D91; /* 左侧深紫竖条做点缀 */
+            padding:10px 22px;
+            border-radius:8px;
+            font-size:22px;
+        }
+
+        /* 通用卡片：白底 + 圆角 + 柔和阴影 + 悬停上浮 */
+        .card{
+            background:#fff;
+            border:1px solid #E5DCF5;
+            border-radius:16px;
+            padding:20px 24px;
+            box-shadow:0 4px 16px rgba(92,45,145,.08);
+            transition:transform .25s,box-shadow .25s;
+        }
+        .card:hover{
+            transform:translateY(-4px);               /* 悬停时向上浮动 */
+            box-shadow:0 10px 24px rgba(92,45,145,.16); /* 阴影加深 */
+        }
+        .card p{line-height:1.8;margin:6px 0}
+
+        /* ===== Skills 板块：进度条 ===== */
+        .skill{margin:14px 0}
+        .skill span{
+            display:inline-block;width:100px;
+            font-weight:bold;color:#5C2D91;
+        }
+        .bar{
+            display:inline-block;vertical-align:middle;
+            width:calc(100% - 110px);height:12px;
+            background:#EDE6F8;border-radius:999px;overflow:hidden;
+        }
+        .fill{
+            height:100%;border-radius:999px;
+            background:linear-gradient(90deg,#5C2D91,#9B7BC8); /* 紫色渐变进度条 */
+        }
+
+        /* ===== Projects / Contact 板块：卡片网格 ===== */
+        .grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); /* 自适应列数 */
+            gap:18px;
+        }
+        .cover{
+            font-size:40px;text-align:center;
+            background:#F3EEFB;border-radius:12px;
+            padding:18px 0;margin-bottom:12px;
+        }
+        h3{color:#5C2D91;margin:4px 0 8px;font-size:18px}
+        .tags span{
+            display:inline-block;
+            background:#EFE8FA;color:#5C2D91;
+            font-size:13px;padding:3px 12px;
+            border-radius:999px;margin:4px 6px 0 0;
+        }
+
+        /* 联系方式卡片（整张卡片是一个链接） */
+        a.card{
+            display:block;text-align:center;
+            text-decoration:none;color:#333;
+            font-size:26px; /* emoji 图标大小 */
+        }
+        a.card b{display:block;color:#5C2D91;font-size:16px;margin-top:8px}
+        a.card span{font-size:14px;color:#666}
+
+        /* ===== Experience 板块：时间线 ===== */
+        .timeline{list-style:none;margin:0;padding:0 0 0 22px;border-left:3px solid #D6C9EC}
+        .timeline li{margin:14px 0;line-height:1.7}
+        .timeline li::before{content:"●";color:#5C2D91;margin-right:10px} /* 时间线圆点 */
+
+        /* ===== Hobbies 板块 ===== */
+        .hobbies{text-align:center;font-size:20px;line-height:2;margin:0}
+
+        /* ===== 页脚 ===== */
+        footer{
+            text-align:center;color:#7A6B8F;
+            font-size:14px;padding:24px 0 32px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 个人信息区：顶部横幅 -->
+    <header class="hero">
+        <div class="avatar">XM</div> <!-- 头像占位：可用图片替换 -->
+        <h1>Xiao Ming 小明</h1>
+        <p class="tagline">Undergraduate @ Tsinghua University · Journalism &amp; Communication</p>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#hobbies">Hobbies</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- About Me 板块：保留原内容 -->
+        <section id="about">
+            <h2> About Me </h2>
+            <div class="card">
+                <p>I am an undergraduate at Tsinghua University</p>
+                <p>I major in Journalism and Communication</p>
+            </div>
+        </section>
+
+        <!-- Skills 板块：文字介绍 + 熟练度进度条（百分比为占位） -->
+        <section id="skills">
+            <h2> Skills </h2>
+            <div class="card">
+                <p>I have learned Python and C for programming, and I use HTML and JavaScript to build web pages.</p>
+                <div class="skill"><span>Python</span><div class="bar"><div class="fill" style="width:80%"></div></div></div>
+                <div class="skill"><span>C</span><div class="bar"><div class="fill" style="width:70%"></div></div></div>
+                <div class="skill"><span>HTML</span><div class="bar"><div class="fill" style="width:85%"></div></div></div>
+                <div class="skill"><span>JavaScript</span><div class="bar"><div class="fill" style="width:65%"></div></div></div>
+            </div>
+        </section>
+
+        <!-- Projects 板块：新增，项目卡片（内容为占位示例） -->
+        <section id="projects">
+            <h2> Projects </h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="cover">🏠</div>
+                    <h3>Personal Homepage</h3>
+                    <p>A static personal homepage built with pure HTML and CSS.</p>
+                    <p class="tags"><span>HTML</span><span>CSS</span></p>
+                </div>
+                <div class="card">
+                    <div class="cover">📊</div>
+                    <h3>Data Visualization Demo</h3>
+                    <p>Charts that turn boring numbers into clear pictures. (placeholder)</p>
+                    <p class="tags"><span>Python</span><span>Charts</span></p>
+                </div>
+                <div class="card">
+                    <div class="cover">📰</div>
+                    <h3>Campus News Mini Site</h3>
+                    <p>A small news page made for a course project. (placeholder)</p>
+                    <p class="tags"><span>HTML</span><span>JavaScript</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience 板块：新增，时间线（内容为占位示例） -->
+        <section id="experience">
+            <h2> Experience </h2>
+            <div class="card">
+                <ul class="timeline">
+                    <li><b>2024 – present</b> · Undergraduate student, Tsinghua University (placeholder)</li>
+                    <li><b>2024</b> · Joined the campus media club as a rookie reporter (placeholder)</li>
+                    <li><b>2023</b> · Started learning programming with Python and C (placeholder)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Hobbies 板块：新增，兴趣爱好（占位） -->
+        <section id="hobbies">
+            <h2> Hobbies </h2>
+            <div class="card">
+                <p class="hobbies">📷 Photography &nbsp;·&nbsp; 🎬 Movies &nbsp;·&nbsp; 🏀 Basketball &nbsp;·&nbsp; ✈️ Travel &nbsp;·&nbsp; 📚 Reading</p>
+            </div>
+        </section>
+
+        <!-- Contact 板块：联系卡片（均为占位信息，不是真实账号） -->
+        <section id="contact">
+            <h2> Contact </h2>
+            <div class="grid">
+                <a class="card" href="mailto:example@email.com">📧<b>Email</b><span>example@email.com</span></a>
+                <a class="card" href="https://github.com/yourusername">💻<b>GitHub</b><span>github.com/yourusername</span></a>
+                <a class="card" href="#contact">💬<b>WeChat</b><span>your-wechat-id</span></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>© 2026 Xiao Ming · Made with pure HTML &amp; CSS</footer>
+</body>
+</html>

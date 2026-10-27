@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* ===== 全局设置 ===== */
+        body{
+            background-color:#E9E2F5; /* 整页淡紫色背景 */
+            font-family:"Segoe UI","Microsoft YaHei",Arial,sans-serif;
+            color:#333;
+            margin:0;
+        }
+        /* 页面主体：居中显示，限制最大宽度 */
+        main{max-width:800px;margin:0 auto;padding:8px 20px 40px}
+
+        /* 姓名标题：沿用原文件的紫色样式 */
+        h1{color:purple}
+
+        /* 板块标题：清华紫 + 加粗 + 浅紫标题块 */
+        h2{
+            display:inline-block;
+            color:#5C2D91;             /* 清华紫（Tsinghua Purple） */
+            font-weight:bold;
+            background-color:#E3D8F2;  /* 浅紫色标题块 */
+            border-left:6px solid #5C2D91; /* 左侧深紫竖条点缀 */
+            padding:10px 20px;
+            border-radius:8px;
+            font-size:20px;
+        }
+
+        /* ===== 统一卡片类：三个板块共用 ===== */
+        .card{
+            background-color:#fff;  /* 白色背景 */
+            padding:16px 24px;      /* 内边距：文字与卡片边缘留出空隙 */
+            margin:16px 0 32px 0;   /* 外边距：卡片之间、卡片与页面边缘留出间隔 */
+            border-radius:12px;     /* 简单圆角 */
+            box-shadow:0 2px 8px rgba(92,45,145,.10); /* 轻微阴影，让卡片更立体 */
+        }
+        .card p{line-height:1.8;margin:6px 0} /* 正文行高稍放宽，阅读更舒服 */
+
+        /* 链接使用清华紫，与整体配色统一 */
+        a{color:#5C2D91}
+    </style>
+</head>
+<body>
+    <!-- 个人信息区 -->
+    <header>
+        <h1>Xiao Ming 小明</h1>
+    </header>
+
+    <main>
+        <!-- About Me 板块：保留原内容，放入卡片 -->
+        <section class="card">
+            <h2> About Me </h2>
+            <p>I am an undergraduate at Tsinghua University</p>
+            <p>I major in Journalism and Communication</p>
+        </section>
+
+        <!-- Skills 板块：放入卡片 -->
+        <section class="card">
+            <h2> Skills </h2>
+            <p>I have learned Python and C for programming, and I use HTML and JavaScript to build web pages.</p>
+        </section>
+
+        <!-- Contact 板块：放入卡片（邮箱与 GitHub 均为占位示例） -->
+        <section class="card">
+            <h2> Contact </h2>
+            <p>You can reach me by email at <a href="mailto:example@email.com">example@email.com</a>, or find me on GitHub at <a href="https://github.com/yourusername">https://github.com/yourusername</a>.</p>
+        </section>
+    </main>
+</body>
+</html>

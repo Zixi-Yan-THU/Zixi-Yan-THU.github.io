@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* ===== 全局设置 ===== */
+        body{
+            background-color:#E9E2F5; /* 整页淡紫色背景 */
+            font-family:"Segoe UI","Microsoft YaHei",Arial,sans-serif;
+            color:#333;
+            margin:0;
+        }
+        /* 页面主体：居中显示，限制最大宽度 */
+        main{max-width:800px;margin:0 auto;padding:8px 20px 40px}
+
+        /* ===== header 头像区（新增） ===== */
+        /* 让 header 里的头像和姓名整体水平居中，顶部留出呼吸空间 */
+        header{text-align:center;padding:28px 20px 0}
+
+        /* 个人头像：固定 150×150 正圆形，白色描边 + 浅紫色阴影 */
+        .avatar{
+            display:block;              /* 转为块级元素，配合 margin:auto 水平居中 */
+            margin:0 auto 14px auto;    /* 居中，并与下方姓名留出 14px 间距 */
+            width:150px;                /* 固定宽度 150px */
+            height:150px;               /* 固定高度 150px */
+            box-sizing:border-box;      /* 让 4px 描边计入 150px 之内，总尺寸保持不变 */
+            border-radius:50%;          /* 裁成正圆形 */
+            object-fit:cover;           /* 图片按比例裁剪填满圆框，不拉伸变形 */
+            border:4px solid #fff;      /* 4px 白色描边，与淡紫色背景区分开 */
+            box-shadow:0 4px 12px rgba(92,45,145,.30); /* 浅紫色阴影，增加立体感 */
+        }
+
+        /* "No Photo"占位块：默认隐藏，仅当头像加载失败时才被显示出来 */
+        #no-photo{
+            display:none;               /* 默认隐藏，由 <img> 的 onerror 事件控制显示 */
+            width:150px;
+            height:150px;
+            margin:0 auto 14px auto;    /* 与头像同样居中、同样底部间距，替换后版式不变 */
+            border-radius:50%;          /* 同样的圆形轮廓 */
+            background-color:#ccc;      /* 灰色圆形底 */
+            color:#666;
+            font-size:14px;             /* 字号稍小 */
+            line-height:150px;          /* 行高等于容器高度，让文字垂直居中 */
+        }
+
+        /* 姓名标题：沿用原文件的紫色样式，并与第一张卡片之间留出间距 */
+        h1{
+            color:purple;               /* 原文件的姓名颜色，保持不变 */
+            margin:0 0 24px 0;          /* 姓名与第一张卡片之间留 24px 间距 */
+        }
+
+        /* ===== 卡片相关 ===== */
+        /* 板块标题：清华紫 + 加粗 + 浅紫标题块 */
+        h2{
+            display:inline-block;
+            color:#5C2D91;             /* 清华紫（Tsinghua Purple） */
+            font-weight:bold;
+            background-color:#E3D8F2;  /* 浅紫色标题块 */
+            border-left:6px solid #5C2D91; /* 左侧深紫竖条点缀 */
+            padding:10px 20px;
+            border-radius:8px;
+            font-size:20px;
+        }
+
+        /* ===== 统一卡片类：三个板块共用 ===== */
+        .card{
+            background-color:#fff;  /* 白色背景 */
+            padding:16px 24px;      /* 内边距：文字与卡片边缘留出空隙 */
+            margin:16px 0 32px 0;   /* 外边距：卡片之间、卡片与页面边缘留出间隔 */
+            border-radius:12px;     /* 简单圆角 */
+            box-shadow:0 2px 8px rgba(92,45,145,.10); /* 轻微阴影，让卡片更立体 */
+        }
+        .card p{line-height:1.8;margin:6px 0} /* 正文行高稍放宽，阅读更舒服 */
+
+        /* ===== 链接 ===== */
+        /* 链接使用清华紫，与整体配色统一 */
+        a{color:#5C2D91}
+    </style>
+</head>
+<body>
+    <!-- 个人信息区：头像 + 姓名 -->
+    <header>
+        <!-- 个人头像：优先加载当前目录下的 profile.jpg。
+             onerror 是原生 JS 事件（等价写法：addEventListener('error', ...)）：
+             若 profile.jpg 不存在或加载失败，就隐藏 <img> 本身，
+             并把下方 #no-photo 灰色占位块显示出来 -->
+        <img src="profile.jpg" alt="个人头像" class="avatar"
+             onerror="this.style.display='none'; document.getElementById('no-photo').style.display='block';">
+
+        <!-- 头像加载失败时的占位块（默认隐藏） -->
+        <div id="no-photo">No Photo</div>
+
+        <h1>Xiao Ming 小明</h1>
+    </header>
+
+    <main>
+        <!-- About Me 板块：保留原内容，放入卡片 -->
+        <section class="card">
+            <h2> About Me </h2>
+            <p>I am an undergraduate at Tsinghua University</p>
+            <p>I major in Journalism and Communication</p>
+        </section>
+
+        <!-- Skills 板块：放入卡片 -->
+        <section class="card">
+            <h2> Skills </h2>
+            <p>I have learned Python and C for programming, and I use HTML and JavaScript to build web pages.</p>
+        </section>
+
+        <!-- Contact 板块：放入卡片（邮箱与 GitHub 均为占位示例） -->
+        <section class="card">
+            <h2> Contact </h2>
+            <p>You can reach me by email at <a href="mailto:example@email.com">example@email.com</a>, or find me on GitHub at <a href="https://github.com/yourusername">https://github.com/yourusername</a>.</p>
+        </section>
+    </main>
+</body>
+</html>
